@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringBar extends Bar{
     private boolean happyHour = false;
     @Override
@@ -15,5 +18,9 @@ public class StringBar extends Bar{
     public void endHappyHour() {
         this.happyHour = false;
         this.notifyObservers();
+    }
+
+    public void order(StringDrink drink, StringRecipe recipe) {
+        recipe.mix(drink);
     }
 }
