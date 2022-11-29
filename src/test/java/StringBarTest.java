@@ -83,4 +83,42 @@ public class StringBarTest {
         stringBar.startHappyHour();
         assertEquals("dCbX-DcBa", drink.getText());
     }
+    @Test
+    public void ferengiAlreadyOpened() {
+        StringBar stringBar = new StringBar();
+        StringDrink drink = new StringDrink("AbCd-aBcD");
+        StringRecipe recipe = getRecipe();
+
+        FerengiClient client = new FerengiClient();
+
+        stringBar.startHappyHour();
+        client.wants(drink, recipe, stringBar);
+        assertEquals("dCbX-DcBa", drink.getText());
+    }
+    @Test
+    public void ferengiStartClosed() {
+        StringBar stringBar = new StringBar();
+        StringDrink drink = new StringDrink("AbCd-aBcD");
+        StringRecipe recipe = getRecipe();
+
+        FerengiClient client = new FerengiClient();
+        stringBar.addObserver(client);
+
+        client.wants(drink, recipe, stringBar);
+        assertEquals("AbCd-aBcD", drink.getText());
+
+        stringBar.startHappyHour();
+        assertEquals("dCbX-DcBa", drink.getText());
+    }
+    @Test
+    public void romulan() {
+        StringBar stringBar = new StringBar();
+        StringDrink drink = new StringDrink("AbCd-aBcD");
+        StringRecipe recipe = getRecipe();
+
+        RomulanClient client = new RomulanClient();
+
+        client.wants(drink, recipe, stringBar);
+        assertEquals("dCbX-DcBa", drink.getText());
+    }
 }
